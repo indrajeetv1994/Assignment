@@ -8,6 +8,9 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./edit.component.scss'],
 })
 export class EditComponent {
+  Api_Url:string;
+  methodName:string;
+  paraId:number;
   constructor(
     public dialogRef: MatDialogRef<EditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -28,6 +31,9 @@ export class EditComponent {
   }
 
   stopEdit(): void {
-    this.dataService.updateUser(this.data);
+    this.Api_Url = "https://jsonplaceholder.typicode.com";
+    this.methodName="posts";
+    this.paraId=this.data.id;
+    this.dataService.updateUser(this.Api_Url,this.methodName,this.paraId,this.data);
   }
 }

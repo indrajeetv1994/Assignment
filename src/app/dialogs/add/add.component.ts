@@ -25,8 +25,12 @@ export class AddComponent {
     this.dialogRef.close();
   }
   ngOnInit(): void {}
+  Api_Url: string;
+  methodName: string;
   public confirmAdd(): void {
     console.log('confirmAdd');
-    this.dataService.addUser(this.data);
+    this.Api_Url = 'https://jsonplaceholder.typicode.com';
+    this.methodName = 'posts';
+    this.dataService.addUser(this.Api_Url, this.methodName, this.data);
   }
 }

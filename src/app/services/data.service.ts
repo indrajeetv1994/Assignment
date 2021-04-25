@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {User} from '../models/user';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  private readonly API_URL = 'https://jsonplaceholder.typicode.com';
-  dataChange: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+  dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   dialogData: any;
   newList : any ;
   constructor(private httpClient: HttpClient) {
    }
 
-  get data(): User[] {
+  get data(): any[] {
     return this.dataChange.value;
   }
 
@@ -22,8 +20,8 @@ export class DataService {
     return this.dialogData;
   }
 
-  getAllUser(): void {
-    this.httpClient.get<User[]>(this.API_URL + '/posts/').subscribe(data => {
+  getAllUser(Api_Url:string,methodName:string): void {
+    this.httpClient.get<any[]>(Api_Url + '/'+ methodName +'/').subscribe(data => {
         this.dataChange.next(data);
       },
       (error: HttpErrorResponse) => {
@@ -31,8 +29,8 @@ export class DataService {
       });
   }
 
-  addUser(user: User):  void {
-      this.httpClient.post<User[]>(this.API_URL + '/posts/',user).subscribe(data => {
+  addUser(Api_Url:string,methodName:string,user: any):  void {
+      this.httpClient.post<any[]>(Api_Url + '/'+ methodName +'/',user).subscribe(data => {
 
           this.dialogData  =  data ;
 
@@ -43,8 +41,8 @@ export class DataService {
 
   }
 
-  updateUser(user: User): void {
-    this.httpClient.put<User[]>(this.API_URL + '/posts/'+user.id,user).subscribe(data => {
+  updateUser(Api_Url:string,methodName:string,paraId:number,user: any): void {
+    this.httpClient.put<any[]>(Api_Url + '/'+methodName+'/'+paraId,user).subscribe(data => {
     this.dialogData = data;
     },
     (error: HttpErrorResponse) => {

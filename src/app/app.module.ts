@@ -1,3 +1,5 @@
+import { EditModule } from './dialogs/edit/edit.module';
+import { AddModule } from './dialogs/add/add.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -6,7 +8,6 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -17,17 +18,15 @@ import { DataService } from './services/data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { AddComponent } from './dialogs/add/add.component';
-import { EditComponent } from './dialogs/edit/edit.component';
+import { ListComponent } from './dialogs/list/list.component';
 
 @NgModule({
-  declarations: [AppComponent, AddComponent, EditComponent],
+  declarations: [AppComponent, ListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatDialogModule,
     FormsModule,
     MatButtonModule,
     MatInputModule,
@@ -38,8 +37,9 @@ import { EditComponent } from './dialogs/edit/edit.component';
     MatPaginatorModule,
     MatGridListModule,
     ReactiveFormsModule,
+    AddModule,
+    EditModule,
   ],
-  entryComponents: [AddComponent, EditComponent],
   providers: [DataService],
   bootstrap: [AppComponent],
 })
